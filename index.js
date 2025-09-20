@@ -6,11 +6,12 @@ import Readline from "readline/promises"
 
 // Importar dependencias y configurar el cliente
 (async () => {
-    const privateKey = fs.readFileSync("private.key", "utf8");
-    const client = await createAuthenticatedClient({
-      walletAddressURL: "https://ilp.interledger-test.dev/hackathon123", // direccion de la billetera remitente
-      privateKey,
-      keyId: "4141c4f0-cabf-4370-a1e6-12547bce2764", // ID de la clave asociada
+    //const privateKey = fs.readFileSync("private.key", "utf8");
+    const client = await  createAuthenticatedClient({
+      walletAddressUrl: 'https://ilp.interledger-test.dev/hackathon123', // direccion de la billetera remitente
+      privateKey: 'private.key',
+      keyId: '849627cf-f039-49e1-95b0-16f6e2b7d46e', // ID de la clave asociada
+      validateResponses: false
     });
 
       // 1. Obtener una concesion para un pago entrante (receiver)
@@ -22,20 +23,22 @@ import Readline from "readline/promises"
       url: "https://ilp.interledger-test.dev/receptor-in"
     })
 
+    console.log("Wallets obtenidas:");
+
     console.log(sendingWalletAddress, receivingwalletAddress);
 
     // 2. Obtener una concesion para un pago entrante = incoming payment
+    
     const incomingPaymentGrant = await client.grant.request(
     {
-      url: receivingwalletAddress.authServer,
-
+      url: receivingwalletAddress.authServer
     },
     {
       access_token: {
         access: [
           {
-            type: "incoming-payment",
-            actions: ["list", "read", "read-all", "complete", "create"]
+            type: 'incoming-payment',
+            actions: ['create']
           },
         ],
       },
@@ -92,7 +95,7 @@ import Readline from "readline/promises"
     // 5. Obtener una cotizacion para el remitente
     const quote = await client.quote.create(
       {
-        url: receivingwalletAddress.resourceServer,
+        url: sendingWalletAddress.resourceServer, //cambio
         accessToken: quoteGrant.access_token.value,
       },
       {
@@ -153,7 +156,7 @@ import Readline from "readline/promises"
       },
       {
         walletAddress: sendingWalletAddress.id,
-        quoteid: quote.id,
+        quoteId: quote.id,
       }
     );
     console.log({outgoingPayment});
