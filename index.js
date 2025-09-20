@@ -8,9 +8,9 @@ import Readline from "readline/promises"
 (async () => {
     const privateKey = fs.readFileSync("private.key", "utf8");
     const client = await createAuthenticatedClient({
-      walletAddressURL: "https://ilp.interledger-test.dev/sending", // direccion de la billetera remitente
+      walletAddressURL: "https://ilp.interledger-test.dev/hackathon123", // direccion de la billetera remitente
       privateKey,
-      keyId: "f9e320ab-e204-4b0a-9c7d-97a5fbfcd803", // ID de la clave asociada
+      keyId: "4141c4f0-cabf-4370-a1e6-12547bce2764", // ID de la clave asociada
     });
 
       // 1. Obtener una concesion para un pago entrante (receiver)
@@ -28,13 +28,14 @@ import Readline from "readline/promises"
     const incomingPaymentGrant = await client.grant.request(
     {
       url: receivingwalletAddress.authServer,
+
     },
     {
       access_token: {
         access: [
           {
             type: "incoming-payment",
-            actions: ["create"],
+            actions: ["list", "read", "read-all", "complete", "create"]
           },
         ],
       },
