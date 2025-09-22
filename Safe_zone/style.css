@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.ventana {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 450px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 0.8s ease;
+}
+
+h1 {
+  color: #2d89ef;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  font-size: 16px;
+}
+
+.mapa {
+  margin: 20px 0;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid #2d89ef;
+}
+
+.fecha {
+  font-weight: bold;
+  color: #444;
+  margin: 15px 0;
+}
+
+.acuerdo {
+  text-align: left;
+  font-size: 14px;
+  margin: 15px 0;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #2d89ef;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+button:hover:enabled {
+  background: #1a5fc1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
